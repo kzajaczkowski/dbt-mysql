@@ -107,7 +107,6 @@ class MySQLConnectionManager(SQLConnectionManager):
                     connection.handle.set_charset_collation(credentials.charset)
             connection.state = "open"
             connection.handle.set_charset_collation("utf8mb4", "utf8mb4_0900_ai_ci")
-            connection.handle = None
         except mysql.connector.Error:
             try:
                 logger.debug(
@@ -120,6 +119,7 @@ class MySQLConnectionManager(SQLConnectionManager):
 
                 connection.handle = mysql.connector.connect(**kwargs)
                 connection.state = "open"
+                connection.handle.set_charset_collation("utf8mb4", "utf8mb4_0900_ai_ci")
             except mysql.connector.Error as e:
                 logger.debug(
                     "Got an error when attempting to open a mysql " "connection: '{}'".format(e)
