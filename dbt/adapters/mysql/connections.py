@@ -95,15 +95,17 @@ class MySQLConnectionManager(SQLConnectionManager):
         if credentials.port:
             kwargs["port"] = credentials.port
 
-        if credentials.charset:
-            kwargs["charset"] = credentials.charset
-
         if credentials.collation:
             kwargs["collation"] = credentials.collation
 
         try:
             connection.handle = mysql.connector.connect(**kwargs)
-            connection.state = "open"
+            if credentials.charset:
+                if credentials.collation:
+                    connection.handle.set_charset_collation(credentials.charset, credentials.collation)
+                else:
+                    connection.handle.set_charset_collation(credentials.charset)
+                connection.state = "open"
         except mysql.connector.Error:
             try:
                 logger.debug(
