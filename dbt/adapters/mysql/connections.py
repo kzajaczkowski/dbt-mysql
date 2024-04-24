@@ -14,7 +14,6 @@ from typing import Optional, Union
 
 logger = AdapterLogger("mysql")
 
-
 @dataclass(init=False)
 class MySQLCredentials(Credentials):
     server: str = ""
@@ -76,6 +75,9 @@ class MySQLConnectionManager(SQLConnectionManager):
 
     @classmethod
     def open(cls, connection):
+
+        raise Exception("Failing on purpose")
+
         if connection.state == "open":
             logger.debug("Connection is already open, skipping open.")
             return connection
