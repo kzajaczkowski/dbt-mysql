@@ -76,8 +76,6 @@ class MySQLConnectionManager(SQLConnectionManager):
     @classmethod
     def open(cls, connection):
 
-        raise Exception("Failing on purpose")
-
         if connection.state == "open":
             logger.debug("Connection is already open, skipping open.")
             return connection
