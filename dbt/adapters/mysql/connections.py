@@ -105,7 +105,7 @@ class MySQLConnectionManager(SQLConnectionManager):
                     connection.handle.set_charset_collation(credentials.charset, credentials.collation)
                 else:
                     connection.handle.set_charset_collation(credentials.charset)
-                connection.state = "open"
+            connection.state = "open"
         except mysql.connector.Error:
             try:
                 logger.debug(
