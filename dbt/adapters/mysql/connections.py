@@ -14,6 +14,7 @@ from typing import Optional, Union
 
 logger = AdapterLogger("mysql")
 
+
 @dataclass(init=False)
 class MySQLCredentials(Credentials):
     server: str = ""
