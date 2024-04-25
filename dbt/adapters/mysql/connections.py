@@ -94,11 +94,11 @@ class MySQLConnectionManager(SQLConnectionManager):
         if credentials.port:
             kwargs["port"] = credentials.port
 
-        # if credentials.charset:
-        #     kwargs["charset"] = credentials.charset
+        if credentials.charset:
+            kwargs["charset"] = credentials.charset
 
-        # if credentials.collation:
-        #     kwargs["collation"] = credentials.collation
+        if credentials.collation:
+            kwargs["collation"] = credentials.collation
 
         try:
             connection.handle = mysql.connector.connect(**kwargs)
