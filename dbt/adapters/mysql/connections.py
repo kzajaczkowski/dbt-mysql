@@ -103,11 +103,11 @@ class MySQLConnectionManager(SQLConnectionManager):
 
         try:
             connection.handle = mysql.connector.connect(**kwargs)
-            # if credentials.charset:
-            #     if credentials.collation:
-            #         connection.handle.set_charset_collation(credentials.charset, credentials.collation)
-            #     else:
-            #         connection.handle.set_charset_collation(credentials.charset)
+            if credentials.charset:
+                if credentials.collation:
+                    connection.handle.set_charset_collation(credentials.charset, credentials.collation)
+                else:
+                    connection.handle.set_charset_collation(credentials.charset)
             connection.state = "open"
             # connection.handle.set_charset_collation("utf8mb4", "utf8mb4_0900_ai_ci")
         except mysql.connector.Error:
