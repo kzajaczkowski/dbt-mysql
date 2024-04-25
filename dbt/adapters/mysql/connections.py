@@ -75,7 +75,6 @@ class MySQLConnectionManager(SQLConnectionManager):
 
     @classmethod
     def open(cls, connection):
-
         if connection.state == "open":
             logger.debug("Connection is already open, skipping open.")
             return connection
@@ -104,7 +103,6 @@ class MySQLConnectionManager(SQLConnectionManager):
         try:
             connection.handle = mysql.connector.connect(**kwargs)
             connection.state = "open"
-
         except mysql.connector.Error:
             try:
                 logger.debug(
@@ -117,7 +115,6 @@ class MySQLConnectionManager(SQLConnectionManager):
 
                 connection.handle = mysql.connector.connect(**kwargs)
                 connection.state = "open"
-
             except mysql.connector.Error as e:
                 logger.debug(
                     "Got an error when attempting to open a mysql " "connection: '{}'".format(e)
